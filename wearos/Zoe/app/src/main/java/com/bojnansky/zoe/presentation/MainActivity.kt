@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.bojnansky.zoe.presentation.theme.FireBotTheme
+import com.bojnansky.zoe.presentation.theme.ZoeTheme
 import com.bojnansky.zoe.presentation.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
 @Composable
 fun WearApp(vm: MainViewModel) {
-    FireBotTheme {
+    ZoeTheme {
         /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
          * version of LazyColumn for wear devices with some added features. For more information,
          * see d.android.com/wear/compose.
@@ -76,7 +76,7 @@ fun WearApp(vm: MainViewModel) {
             ) {
                 Button(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
-                    onClick = fun () { vm.runCommand("last feeding") }
+                    onClick = fun () { vm.runCommand("report breastfeeding") }
                 ) {
                     Text("Report")
                 }
@@ -95,19 +95,19 @@ fun WearApp(vm: MainViewModel) {
             ) {
                 Button(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
-                    onClick = fun () { vm.runCommand("start feeding") }
+                    onClick = fun () { vm.runCommand("start breastfeeding") }
                 ) {
                     Text("Start")
                 }
                 Button(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
-                    onClick = fun () { vm.runCommand("end feeding") }
+                    onClick = fun () { vm.runCommand("stop breastfeeding") }
                 ) {
                     Text("Stop")
                 }
             }
             Text(
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                modifier = Modifier.fillMaxWidth().padding(10.dp),
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colors.primary,
                 text = vm.state.value.text

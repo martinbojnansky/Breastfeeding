@@ -7,10 +7,11 @@ function runCommand(command) {
   switch(command) {
     case 'start feeding':
       return startBreastfeeding();
-    case 'stop feeding':
-    case 'end feeding':
+    case 'stop breastfeeding':
+    case 'end breastfeeding':
       return stopBreastfeeding();
-    case 'last feeding':
+    case 'last breastfeeding':
+    case 'stop brestfeeding':
       return reportBreastfeeding();
     default:
       return `I don't understand.`;
@@ -83,7 +84,7 @@ function reportBreastfeeding() {
     const endDate = new Date(lastBreastfeeding[1]);
     const elapsedTimeEnd = getElapsedTime(endDate, now);
     const elapsedTimeFeeding = getElapsedTime(startDate, endDate);
-    return returnWithLog(`Last breastfeeding ended ${formatElapsedTime(elapsedTimeEnd)} ago and took ${formatElapsedTime(elapsedTimeFeeding)}.`);
+    return returnWithLog(`Last breastfeeding ended ${formatElapsedTime(elapsedTimeEnd)} ago, took ${formatElapsedTime(elapsedTimeFeeding)}, and was on the ${lastBreastfeeding[2]} breast.`);
   }
 }
 

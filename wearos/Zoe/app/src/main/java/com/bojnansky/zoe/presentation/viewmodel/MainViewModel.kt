@@ -6,7 +6,7 @@ import android.speech.tts.TextToSpeech
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.bojnansky.zoe.presentation.ApiService
+import com.bojnansky.zoe.presentation.service.ApiService
 import com.bojnansky.zoe.presentation.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,7 +34,7 @@ class MainViewModel : ViewModel {
 
     fun configureTextToSpeech(p0: Int) {
         if(p0 == TextToSpeech.SUCCESS) {
-            this.tts!!.setLanguage(Locale.US);
+           this.tts!!.language = Locale.US;
         }
     }
 
@@ -74,7 +74,7 @@ class MainViewModel : ViewModel {
         service.runCommand(command).enqueue(object : Callback<String?> {
             override fun onFailure(call: Call<String?>, t: Throwable) {
                 _state.value = MainViewModelState(text = "Network error")
-                speak("network error. try again, please.")
+                speak("Network error. Try again, please.")
             }
 
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
