@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+    <style>
+      html, body {
+        background: #222;
+        color: #e2e2e2;
+      }
+
+      body {
+        padding: 0 8vw;
+      }
+
+      button {
+        width: 33vw;
+        height: 33vh;
+        border-radius: 5%;
+        font-size: 6vw;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 2vh 4vh;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+    
+    <div class="row">
+      <button id="reportBtn" style="background: gold;">Report</button>
+    </div>
+    <div class="row">
+      <button id="startBtn" style="background: limegreen;">Start</button>
+      <button id="stopBtn" style="background: crimson;">Stop</button>
+    </div>
+    <h1 id="output"><?= result ?></h1>
+    
+    <script>
+      function setOutput(result) {
+        var outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = result;
+      }
+
+      function run(command) {
+        setOutput('Please wait...');
+        google.script.run
+          .withSuccessHandler((res) => setOutput(res))
+          .withFailureHandler((err) => setOutput('Network error. Try again, please.'))
+          .doPost({ parameter: { command: command, raw: true }});
+      }
+
+      document.getElementById('reportBtn').addEventListener('click', () => {
+        run('last breastfeeding');
+      });
+      document.getElementById('startBtn').addEventListener('click', () => {
+        run('start breastfeeding');
+      });
+      document.getElementById('stopBtn').addEventListener('click', () => {
+        run('stop breastfeeding');
+      });
+    </script>
+  </body>
+</html>

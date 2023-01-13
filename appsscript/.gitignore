@@ -1,0 +1,3 @@
+# compiled output
+dist/backend.bundle.js
+node_modules/

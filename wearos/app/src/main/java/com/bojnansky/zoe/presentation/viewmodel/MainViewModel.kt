@@ -38,31 +38,6 @@ class MainViewModel : ViewModel {
         }
     }
 
-    fun listen() {
-        _state.value = MainViewModelState(text = "..")
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        // This starts the activity and populates the intent with the speech text.
-        activity.startActivityForResult(intent, 0)
-    }
-
-    fun afterListen(requestCode: Int, resultCode: Int, data: Intent?) {
-        // if (requestCode == 0 && resultCode == ComponentActivity.RESULT_OK) {
-            val results: List<String>? = data?.getStringArrayListExtra(
-                RecognizerIntent.EXTRA_RESULTS
-            )
-            val command = results!![0] ?: ""
-            if(command == "") {
-                _state.value = MainViewModelState(text = "")
-                return;
-            }
-            runCommand(command)
-        // }
-    }
-
     fun runCommand(command: String) {
         _state.value = MainViewModelState(text = "Please wait")
         val service = Retrofit.Builder()

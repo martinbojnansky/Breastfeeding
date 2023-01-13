@@ -40,14 +40,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         vm.initTextToSpeech()
     }
 
-    override fun onActivityResult(
-        requestCode: Int, resultCode: Int,
-        data: Intent?
-    ) {
-        vm.afterListen(resultCode, requestCode, data)
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
     override fun onInit(p0: Int) {
         vm.configureTextToSpeech(p0)
     }
@@ -76,15 +68,9 @@ fun WearApp(vm: MainViewModel) {
             ) {
                 Button(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
-                    onClick = fun () { vm.runCommand("report breastfeeding") }
+                    onClick = fun () { vm.runCommand("breastfeeding report") }
                 ) {
                     Text("Report")
-                }
-                Button(
-                    modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
-                    onClick = fun () { vm.listen() }
-                ) {
-                    Text("Talk")
                 }
             }
             Row(
